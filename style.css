@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Ubuntu", sans-serif;
+  --color-marine: hsl(213, 96%, 18%);
+  --color-purplish: hsl(243, 100%, 62%);
+  --color-pastel: hsl(228, 100%, 84%);
+  --color-lightBlue: hsl(206, 94%, 87%);
+  --color-strawberry: hsl(354, 84%, 57%);
+  --color-coolGray: hsl(231, 11%, 63%);
+  --color-lightGray: hsl(229, 24%, 87%);
+  --color-magnolia: hsl(217, 100%, 97%);
+  --color-alabaster: hsl(231, 100%, 99%);
+}

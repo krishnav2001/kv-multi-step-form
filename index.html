@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Multi-step form</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="./style.css" />
+    </head>
+
+    <body
+        class="bg-magnolia text-marine font-sans min-h-screen flex flex-col justify-between md:items-center md:justify-center md:p-6"
+    >
+        <div
+            id="app-wrapper"
+            class="relative pb-24 md:flex md:w-full md:max-w-4xl md:min-h-[36rem] md:bg-white md:rounded-2xl md:shadow-xl md:shadow-marine/5 md:p-4 md:pb-4"
+        >
+            <!-- Header / Mobile Stepper -->
+            <header
+                id="sidebar"
+                class="h-44 w-full bg-gradient-to-br from-purplish via-indigo-600 to-marine bg-cover bg-center flex justify-center pt-8 md:w-68 md:h-auto md:min-h-full md:rounded-xl md:p-8 md:justify-start md:pt-8"
+                style="
+                    background-image:
+                        url(&quot;./images/bg-sidebar-mobile.svg&quot;),
+                        linear-gradient(135deg, #473dff 0%, #1e3a8a 100%);
+                "
+            >
+                <nav
+                    aria-label="Form steps"
+                    class="flex items-start gap-4 md:flex-col md:gap-7 md:w-full"
+                >
+                    <div class="flex items-center gap-4">
+                        <button
+                            type="button"
+                            data-step-indicator="1"
+                            class="step-circle w-8 h-8 rounded-full border border-lightBlue bg-lightBlue text-marine font-bold text-sm flex items-center justify-center shrink-0 transition"
+                        >
+                            1
+                        </button>
+                        <div
+                            class="hidden md:flex md:flex-col md:uppercase md:text-left"
+                        >
+                            <span class="text-[11px] text-pastel tracking-wider"
+                                >Step 1</span
+                            >
+                            <span
+                                class="text-xs font-bold text-white tracking-widest"
+                                >Your info</span
+                            >
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <button
+                            type="button"
+                            data-step-indicator="2"
+                            class="step-circle w-8 h-8 rounded-full border border-white text-white font-bold text-sm flex items-center justify-center shrink-0 transition"
+                        >
+                            2
+                        </button>
+                        <div
+                            class="hidden md:flex md:flex-col md:uppercase md:text-left"
+                        >
+                            <span class="text-[11px] text-pastel tracking-wider"
+                                >Step 2</span
+                            >
+                            <span
+                                class="text-xs font-bold text-white tracking-widest"
+                                >Select plan</span
+                            >
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <button
+                            type="button"
+                            data-step-indicator="3"
+                            class="step-circle w-8 h-8 rounded-full border border-white text-white font-bold text-sm flex items-center justify-center shrink-0 transition"
+                        >
+                            3
+                        </button>
+                        <div
+                            class="hidden md:flex md:flex-col md:uppercase md:text-left"
+                        >
+                            <span class="text-[11px] text-pastel tracking-wider"
+                                >Step 3</span
+                            >
+                            <span
+                                class="text-xs font-bold text-white tracking-widest"
+                                >Add-ons</span
+                            >
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <button
+                            type="button"
+                            data-step-indicator="4"
+                            class="step-circle w-8 h-8 rounded-full border border-white text-white font-bold text-sm flex items-center justify-center shrink-0 transition"
+                        >
+                            4
+                        </button>
+                        <div
+                            class="hidden md:flex md:flex-col md:uppercase md:text-left"
+                        >
+                            <span class="text-[11px] text-pastel tracking-wider"
+                                >Step 4</span
+                            >
+                            <span
+                                class="text-xs font-bold text-white tracking-widest"
+                                >Summary</span
+                            >
+                        </div>
+                    </div>
+                </nav>
+            </header>
+
+            <!-- Floating Main Card -->
+            <!-- Right Column (Main Content + Bottom Navigation) -->
+            <div id="right-column" class="md:flex-1 md:flex md:flex-col md:justify-between md:px-14 md:pt-8 md:pb-2">
+            <main
+                id="form-card"
+                class="mx-4 -mt-20 bg-white rounded-2xl shadow-lg shadow-marine/5 px-6 py-8 md:mx-0 md:mt-0 md:p-0 md:rounded-none md:shadow-none md:flex-1"
+            >
+                <!-- Step 1: Personal info -->
+                <section id="step-1" class="step-panel">
+                    <h1 class="text-2xl font-bold text-marine mb-2">
+                        Personal info
+                    </h1>
+                    <p class="text-coolGray text-base leading-relaxed mb-6">
+                        Please provide your name, email address, and phone
+                        number.
+                    </p>
+
+                    <form id="personal-form" novalidate class="space-y-4">
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <label
+                                    for="name"
+                                    class="text-xs font-medium text-marine"
+                                    >Name</label
+                                >
+                                <span
+                                    id="name-error"
+                                    class="text-xs font-bold text-strawberry hidden"
+                                >
+                                    This field is required
+                                </span>
+                            </div>
+                            <input
+                                id="name"
+                                type="text"
+                                placeholder="e.g. Stephen King"
+                                class="w-full px-4 py-2.5 rounded-lg border border-lightGray text-sm font-medium text-marine placeholder:text-coolGray focus:outline-none focus:border-purplish transition"
+                            />
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <label
+                                    for="email"
+                                    class="text-xs font-medium text-marine"
+                                    >Email Address</label
+                                >
+                                <span
+                                    id="email-error"
+                                    class="text-xs font-bold text-strawberry hidden"
+                                >
+                                    This field is required
+                                </span>
+                            </div>
+                            <input
+                                id="email"
+                                type="email"
+                                placeholder="e.g. stephenking@lorem.com"
+                                class="w-full px-4 py-2.5 rounded-lg border border-lightGray text-sm font-medium text-marine placeholder:text-coolGray focus:outline-none focus:border-purplish transition"
+                            />
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <label
+                                    for="phone"
+                                    class="text-xs font-medium text-marine"
+                                    >Phone Number</label
+                                >
+                                <span
+                                    id="phone-error"
+                                    class="text-xs font-bold text-strawberry hidden"
+                                >
+                                    This field is required
+                                </span>
+                            </div>
+                            <input
+                                id="phone"
+                                type="tel"
+                                placeholder="e.g. +1 234 567 890"
+                                class="w-full px-4 py-2.5 rounded-lg border border-lightGray text-sm font-medium text-marine placeholder:text-coolGray focus:outline-none focus:border-purplish transition"
+                            />
+                        </div>
+                    </form>
+                </section>
+                <!-- Step 2: Select your plan -->
+                <section id="step-2" class="step-panel hidden">
+                    <h1 class="text-2xl font-bold text-marine mb-2">
+                        Select your plan
+                    </h1>
+                    <p class="text-coolGray text-base leading-relaxed mb-6">
+                        You have the option of monthly or yearly billing.
+                    </p>
+
+                    <div id="plan-options" class="space-y-3 mb-6 md:grid md:grid-cols-3 md:gap-4 md:space-y-0 md:mb-8">
+                        <button
+                            type="button"
+                            data-plan="arcade"
+                            class="plan-card w-full flex items-center gap-4 p-4 rounded-xl border border-purplish bg-alabaster text-left transition md:flex-col md:items-start md:justify-between md:min-h-40 md:p-4"
+                        >
+                            <img
+                                src="./images/icon-arcade.svg"
+                                alt=""
+                                class="w-10 h-10 shrink-0 md:mb-8"
+                            />
+                            <div>
+                                <div
+                                    class="font-bold text-marine text-base leading-tight"
+                                >
+                                    Arcade
+                                </div>
+                                <div
+                                    data-plan-price="arcade"
+                                    class="text-coolGray text-sm mt-0.5"
+                                >
+                                    $9/mo
+                                </div>
+                                <div
+                                    data-yearly-promo
+                                    class="text-marine text-xs mt-1 hidden"
+                                >
+                                    2 months free
+                                </div>
+                            </div>
+                        </button>
+
+                        <button
+                            type="button"
+                            data-plan="advanced"
+                            class="plan-card w-full flex items-center gap-4 p-4 rounded-xl border border-lightGray bg-white text-left hover:border-purplish transition md:flex-col md:items-start md:justify-between md:min-h-40 md:p-4"
+                        >
+                            <img
+                                src="./images/icon-advanced.svg"
+                                alt=""
+                                class="w-10 h-10 shrink-0 md:mb-8"
+                            />
+                            <div>
+                                <div
+                                    class="font-bold text-marine text-base leading-tight"
+                                >
+                                    Advanced
+                                </div>
+                                <div
+                                    data-plan-price="advanced"
+                                    class="text-coolGray text-sm mt-0.5"
+                                >
+                                    $12/mo
+                                </div>
+                                <div
+                                    data-yearly-promo
+                                    class="text-marine text-xs mt-1 hidden"
+                                >
+                                    2 months free
+                                </div>
+                            </div>
+                        </button>
+
+                        <button
+                            type="button"
+                            data-plan="pro"
+                            class="plan-card w-full flex items-center gap-4 p-4 rounded-xl border border-lightGray bg-white text-left hover:border-purplish transition md:flex-col md:items-start md:justify-between md:min-h-40 md:p-4"
+                        >
+                            <img
+                                src="./images/icon-pro.svg"
+                                alt=""
+                                class="w-10 h-10 shrink-0 md:mb-8"
+                            />
+                            <div>
+                                <div
+                                    class="font-bold text-marine text-base leading-tight"
+                                >
+                                    Pro
+                                </div>
+                                <div
+                                    data-plan-price="pro"
+                                    class="text-coolGray text-sm mt-0.5"
+                                >
+                                    $15/mo
+                                </div>
+                                <div
+                                    data-yearly-promo
+                                    class="text-marine text-xs mt-1 hidden"
+                                >
+                                    2 months free
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div
+                        class="bg-alabaster rounded-xl py-3 px-4 flex items-center justify-center gap-6"
+                    >
+                        <span
+                            id="label-monthly"
+                            class="text-sm font-bold text-marine"
+                            >Monthly</span
+                        >
+                        <button
+                            id="billing-toggle"
+                            type="button"
+                            role="switch"
+                            aria-checked="false"
+                            aria-label="Toggle yearly billing"
+                            class="w-10 h-5 rounded-full bg-marine p-1 flex items-center transition"
+                        >
+                            <span
+                                id="billing-knob"
+                                class="w-3.5 h-3.5 rounded-full bg-white transition-transform translate-x-0"
+                            ></span>
+                        </button>
+                        <span
+                            id="label-yearly"
+                            class="text-sm font-bold text-coolGray"
+                            >Yearly</span
+                        >
+                    </div>
+                </section>
+                <!-- Step 3: Pick add-ons -->
+                <section id="step-3" class="step-panel hidden">
+                    <h1 class="text-2xl font-bold text-marine mb-2">
+                        Pick add-ons
+                    </h1>
+                    <p class="text-coolGray text-base leading-relaxed mb-6">
+                        Add-ons help enhance your gaming experience.
+                    </p>
+
+                    <div class="space-y-3">
+                        <label
+                            data-addon-card="online"
+                            class="addon-card flex items-center justify-between gap-3 p-4 rounded-xl border border-lightGray bg-white cursor-pointer hover:border-purplish transition"
+                        >
+                            <div class="flex items-center gap-3.5">
+                                <input
+                                    type="checkbox"
+                                    data-addon="online"
+                                    class="addon-checkbox w-5 h-5 rounded accent-purplish cursor-pointer"
+                                />
+                                <div>
+                                    <div class="font-bold text-marine text-sm">
+                                        Online service
+                                    </div>
+                                    <div class="text-coolGray text-xs mt-0.5">
+                                        Access to multiplayer games
+                                    </div>
+                                </div>
+                            </div>
+                            <span
+                                data-addon-price="online"
+                                class="text-xs font-medium text-purplish shrink-0"
+                            >
+                                +$1/mo
+                            </span>
+                        </label>
+
+                        <label
+                            data-addon-card="storage"
+                            class="addon-card flex items-center justify-between gap-3 p-4 rounded-xl border border-lightGray bg-white cursor-pointer hover:border-purplish transition"
+                        >
+                            <div class="flex items-center gap-3.5">
+                                <input
+                                    type="checkbox"
+                                    data-addon="storage"
+                                    class="addon-checkbox w-5 h-5 rounded accent-purplish cursor-pointer"
+                                />
+                                <div>
+                                    <div class="font-bold text-marine text-sm">
+                                        Larger storage
+                                    </div>
+                                    <div class="text-coolGray text-xs mt-0.5">
+                                        Extra 1TB of cloud save
+                                    </div>
+                                </div>
+                            </div>
+                            <span
+                                data-addon-price="storage"
+                                class="text-xs font-medium text-purplish shrink-0"
+                            >
+                                +$2/mo
+                            </span>
+                        </label>
+
+                        <label
+                            data-addon-card="profile"
+                            class="addon-card flex items-center justify-between gap-3 p-4 rounded-xl border border-lightGray bg-white cursor-pointer hover:border-purplish transition"
+                        >
+                            <div class="flex items-center gap-3.5">
+                                <input
+                                    type="checkbox"
+                                    data-addon="profile"
+                                    class="addon-checkbox w-5 h-5 rounded accent-purplish cursor-pointer"
+                                />
+                                <div>
+                                    <div class="font-bold text-marine text-sm">
+                                        Customizable profile
+                                    </div>
+                                    <div class="text-coolGray text-xs mt-0.5">
+                                        Custom theme on your profile
+                                    </div>
+                                </div>
+                            </div>
+                            <span
+                                data-addon-price="profile"
+                                class="text-xs font-medium text-purplish shrink-0"
+                            >
+                                +$2/mo
+                            </span>
+                        </label>
+                    </div>
+                </section>
+                <!-- Step 4: Finishing up -->
+                <section id="step-4" class="step-panel hidden">
+                    <h1 class="text-2xl font-bold text-marine mb-2">
+                        Finishing up
+                    </h1>
+                    <p class="text-coolGray text-base leading-relaxed mb-6">
+                        Double-check everything looks OK before confirming.
+                    </p>
+
+                    <div class="bg-alabaster rounded-xl p-4 mb-5">
+                        <div
+                            class="flex items-center justify-between pb-4 border-b border-lightGray"
+                        >
+                            <div>
+                                <div
+                                    id="summary-plan-title"
+                                    class="font-bold text-marine text-sm"
+                                >
+                                    Arcade (Monthly)
+                                </div>
+                                <button
+                                    id="change-plan-btn"
+                                    type="button"
+                                    class="text-xs text-coolGray underline hover:text-purplish mt-0.5"
+                                >
+                                    Change
+                                </button>
+                            </div>
+                            <div
+                                id="summary-plan-price"
+                                class="font-bold text-marine text-sm"
+                            >
+                                $9/mo
+                            </div>
+                        </div>
+
+                        <div
+                            id="summary-addons"
+                            class="pt-3 space-y-2.5 text-sm"
+                        ></div>
+                    </div>
+
+                    <div class="flex items-center justify-between px-4">
+                        <span
+                            id="summary-total-label"
+                            class="text-sm text-coolGray"
+                            >Total (per month)</span
+                        >
+                        <span
+                            id="summary-total-price"
+                            class="text-base font-bold text-purplish"
+                            >+$12/mo</span
+                        >
+                    </div>
+                </section>
+                <!-- Step 5: Thank you -->
+                <section
+                    id="step-5"
+                    class="step-panel hidden py-10 text-center"
+                >
+                    <img
+                        src="./images/icon-thank-you.svg"
+                        alt=""
+                        class="w-14 h-14 mx-auto mb-5"
+                    />
+                    <h1 class="text-2xl font-bold text-marine mb-3">
+                        Thank you!
+                    </h1>
+                    <p class="text-coolGray text-base leading-relaxed">
+                        Thanks for confirming your subscription! We hope you
+                        have fun using our platform. If you ever need support,
+                        please feel free to email us at support@loremgaming.com.
+                    </p>
+                </section>
+            </main>
+            <!-- Bottom Navigation Bar -->
+            <footer
+                id="bottom-bar"
+                class="fixed bottom-0 inset-x-0 bg-white px-4 py-4 flex items-center justify-between border-t border-lightGray/40 md:static md:px-0 md:py-4 md:border-t-0 md:bg-transparent"
+            >
+                <button
+                    id="back-btn"
+                    type="button"
+                    class="text-sm font-medium text-coolGray hover:text-marine transition invisible"
+                >
+                    Go Back
+                </button>
+                <button
+                    id="next-btn"
+                    type="button"
+                    class="ml-auto bg-marine hover:bg-marine/90 text-white text-sm font-medium px-5 py-3 rounded-lg transition"
+                >
+                    Next Step
+                </button>
+            </footer>
+            </div>
+        </div>
+        <script type="module" src="./script.js"></script>
+    </body>
+</html>
